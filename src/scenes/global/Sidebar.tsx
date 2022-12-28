@@ -1,3 +1,5 @@
+import React, { ReactElement } from "react";
+
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -18,7 +20,15 @@ import PieChartOutlineOutlined from "@mui/icons-material/PieChartOutlineOutlined
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+type ItemProps = {
+  title: string;
+  to: string;
+  icon: ReactElement;
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -155,7 +165,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Typography
+            <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
@@ -183,7 +193,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Typography
+            <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}

@@ -1,8 +1,24 @@
+import React, { ReactElement } from "react";
+
 import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../theme";
 import ProgressCircle from "./ProgressCircle";
 
-const StartBox = ({ title, subtitle, icon, progress, increase }) => {
+type StartBoxProps = {
+  title: string;
+  subtitle: string;
+  icon: ReactElement;
+  progress: string;
+  increase: string;
+};
+
+const StartBox = ({
+  title,
+  subtitle,
+  icon,
+  progress,
+  increase,
+}: StartBoxProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

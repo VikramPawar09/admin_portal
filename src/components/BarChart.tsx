@@ -1,5 +1,7 @@
 // Documentation : https://nivo.rocks/bar/
 
+import React from "react";
+
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
@@ -99,7 +101,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend:  isDashboard ? undefined : "food",
+        legend: isDashboard ? undefined : "food",
         legendPosition: "middle",
         legendOffset: -40,
       }}

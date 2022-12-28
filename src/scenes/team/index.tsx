@@ -1,5 +1,7 @@
+import React from "react";
+
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -11,7 +13,7 @@ const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const columns = [
+  const columns: GridColumns = [
     { field: "id", headerName: "ID" },
     {
       field: "name",
@@ -40,7 +42,7 @@ const Team = () => {
             p="5px"
             display="flex"
             justifyContent="center"
-            backgroundColor={
+            bgcolor={
               access === "admin"
                 ? colors.greenAccent[600]
                 : colors.greenAccent[700]

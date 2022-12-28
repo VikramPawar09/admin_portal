@@ -1,9 +1,11 @@
+import React from "react";
+
 import { ResponsiveLine } from "@nivo/line";
 import { mockLineData as data } from "../data/mockData";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
 
-const LineChart = (isDashboard = false) => {
+const LineChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -54,7 +56,7 @@ const LineChart = (isDashboard = false) => {
       axisTop={null}
       axisRight={null}
       axisBottom={{
-        orient: "bottom",
+        //  orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -63,7 +65,7 @@ const LineChart = (isDashboard = false) => {
         legendPosition: "middle",
       }}
       axisLeft={{
-        orient: "left",
+        //   orient: "left",
         tickValues: 5,
         tickSize: 5,
         tickPadding: 5,

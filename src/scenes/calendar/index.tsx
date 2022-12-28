@@ -1,7 +1,14 @@
 // Documentation : https://fullcalendar.io/docs/initialize-es6
 
+import React from "react";
+
 import { useState } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar, {
+  DateSelectArg,
+  EventApi,
+  EventClickArg,
+  formatDate,
+} from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
@@ -20,16 +27,17 @@ import { tokens } from "../../theme";
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [currentEvents, setCurrentEvents] = useState([]);
+  const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
 
-  const handleDateClick = (selected) => {
-    const title = prompt("Please enter a new title for your event.");
+  const handleDateClick = (selected: DateSelectArg) => {
+    const title: string =
+      prompt("Please enter a new title for your event.") || "";
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
     if (title) {
       calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
+        id: `${selected.startStr}-${title}`,
         title,
         start: selected.startStr,
         end: selected.endStr,
@@ -38,10 +46,10 @@ const Calendar = () => {
     }
   };
 
-  const handleEventClick = (selected) => {
+  const handleEventClick = (selected: EventClickArg) => {
     if (
       window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}'`
+        `Are you sure you want to delete the event '${selected?.event?.title}'`
       )
     ) {
       selected.event.remove();
@@ -55,7 +63,7 @@ const Calendar = () => {
         {/*Calendar Sidebar*/}
         <Box
           flex="1 1 20%"
-          backgroundColor={colors.primary[400]}
+          bgcolor={colors.primary[400]}
           p="15px"
           borderRadius="4px"
         >
@@ -63,18 +71,18 @@ const Calendar = () => {
           <List>
             {currentEvents.map((event) => (
               <ListItem
-                key={event.id}
+                key={event?.id}
                 sx={{
-                  backgroundColor: colors.greenAccent[500],
+                  bgcolor: colors.greenAccent[500],
                   margin: "10px 0",
                   borderRadius: "2px",
                 }}
               >
                 <ListItemText
-                  primary={event.title}
+                  primary={event?.title}
                   secondary={
                     <Typography>
-                      {formatDate(event.start, {
+                      {formatDate(event?.start || "", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
@@ -109,7 +117,7 @@ const Calendar = () => {
             dayMaxEvents={true}
             select={handleDateClick}
             eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
+            eventsSet={(events: EventApi[]) => setCurrentEvents(events)}
             initialEvents={[
               { id: "1234", title: "All-day event", date: "2022-11-14" },
               { id: "4321", title: "Timed event", date: "2022-11-28" },
